@@ -1,0 +1,29 @@
+name: Build and Release PDF
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+
+      - name: Publish to Release (continuous)
+        uses: ncipollo/release-action@v1
+        with:
+          tag: continuous
+          name: Continuous build
+          body: "Auto-updated for ${{ github.sha }} on ${{ github.ref_name }}."
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: main.pdf
