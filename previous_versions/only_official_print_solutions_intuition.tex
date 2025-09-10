@@ -1,0 +1,452 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=2cm,
+    bottom=2.5cm
+]{geometry}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, positioning, decorations.pathmorphing, shapes.misc}
+
+\pagestyle{empty}
+
+% Punkte optional machen: bei leerem #2 keine Punkte anzeigen
+\newcommand{\aufgabe}[2]{%
+  \section*{\Large\bfseries Aufgabe #1%
+  \if\relax\detokenize{#2}\relax\else \hfill\normalfont\normalsize(#2 Punkte)\fi}%
+  \vspace{-1.5ex}
+}
+
+\setlist[enumerate,1]{label=(\alph*)}
+\setlist[enumerate,2]{label=(\roman*)}
+
+\tikzset{
+    infoBubble/.style={circle, draw, thick, minimum size=1.5cm, align=center},
+    dashedBubble/.style={circle, dashed, draw, thick, minimum size=2.5cm},
+    saveDateRibbon/.style={
+        tape,
+        tape bend top=none,
+        tape bend bottom=none,
+        draw, thick, fill=white,
+        text=black, font=\small\bfseries, align=center
+    }
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+    \vspace{0pt}
+    \includegraphics[height=1.5cm]{kit_logo.png} \\ % Logo (optional)
+    {\Large\bfseries Lineare Algebra 2 für die Fachrichtung Informatik} \\[0.5em]
+    {\large\bfseries Inoffizielle Transkription der Aufgabensammlung}
+    {(1-1, 3-1, 4-2, 7-1, 8-2, 10-2, 11-1, 11-2, 12-1, 12-3, 13-2)}
+\end{minipage}%
+\begin{minipage}[t]{0.4\textwidth}
+    \vspace{0pt}
+    \raggedleft
+    \small
+    \textbf{Institut für Algebra und Geometrie} \\
+    PD. Dr. Stefan Kühnlein \\
+    Maximilian Wackenhuth, M. Sc. \\
+    \vspace{0.5em}
+    \textbf{Lösung formatiert von:} \\
+    \href{https://github.com/fregeh}{fregeh} \\
+    \vspace{1em}
+    \textbf{Sommersemester 2025}
+\end{minipage}
+
+\vspace{0.5cm}
+\hrule
+
+% =========================
+% AUFGABE 1
+% =========================
+\aufgabe{1}{}
+\begin{enumerate}
+  \item Es sei $\Phi:\mathbb{R}^n\to\mathbb{R}^n$ ein Endomorphismus, welcher die Gleichung
+  \[
+    \Phi^3+10\Phi=7\Phi^2
+  \]
+  erfüllt. Zeigen Sie, dass $\Phi$ diagonalisierbar ist. Nutzen Sie dafür Folgerung 9.1.9, um $\mathbb{R}^n$ in Eigenräume von $\Phi$ zu zerlegen.
+  \begin{framed}
+  Wir wissen, dass für $f(X)=X^3-7X^2+10X=X(X-5)(X-2)$ gilt $f(\Phi)=0$. Nach 9.1.9 folgt
+  \[
+    \mathbb{R}^n=\ker(\Phi)\oplus\ker\!\big((\Phi-5\mathrm{id})(\Phi-2\mathrm{id})\big).
+  \]
+  Für $x\in\ker\!\big((\Phi-5\mathrm{id})(\Phi-2\mathrm{id})\big)$ gilt
+  \[
+    (\Phi-5\mathrm{id})(\Phi-2\mathrm{id})\Phi(x)
+     =\Phi(\Phi-5\mathrm{id})(\Phi-2\mathrm{id})(x)=\Phi(0)=0,
+  \]
+  also ist dieser Kern $\Phi$-invariant. Setze
+  \[
+    \varphi:=\Phi\big|_{\ker((\Phi-5\mathrm{id})(\Phi-2\mathrm{id}))}.
+  \]
+  Dann ist $g(\varphi)=0$ für $g(X)=(X-2)(X-5)$, und wieder nach 9.1.9
+  \[
+    \ker\!\big((\Phi-5\mathrm{id})(\Phi-2\mathrm{id})\big)
+      =\ker(\varphi-5\mathrm{id})\oplus\ker(\varphi-2\mathrm{id}).
+  \]
+  Insgesamt also
+  \[
+    \mathbb{R}^n=\ker(\Phi)\oplus\ker(\varphi-5\mathrm{id})\oplus\ker(\varphi-2\mathrm{id}).
+  \]
+  Für $x\in\ker(\varphi-5\mathrm{id})$ ist $\Phi(x)=\varphi(x)=5x$, und für
+  $x\in\ker(\varphi-2\mathrm{id})$ ist $\Phi(x)=2x$. Wählt man Basen $B_0$,
+  $B_5$, $B_2$ der drei Kerne, so ist $\Phi$ bezüglich
+  $B=B_0\cup B_5\cup B_2$ diagonal. Damit ist $\Phi$ diagonalisierbar.
+
+  \medskip\noindent\textit{Intuition: Das Minimalpolynom zerfällt in linearfaktorige Stücke; damit zerlegt sich der Raum in Eigenräume und Phi wirkt dort wie Skalierung. So entsteht eine Diagonalbasis.}
+  \end{framed}
+
+  \item Geben Sie ein Beispiel für einen Endomorphismus $\Psi:\mathbb{R}^3\to\mathbb{R}^3$ an, dessen charakteristisches Polynom
+  \[
+    f(X)=X^3-7X^2
+  \]
+  ist, der aber nicht diagonalisierbar ist.
+  \begin{framed}
+  Betrachte
+  \[
+    A=\begin{pmatrix}
+      7&0&0\\
+      0&0&1\\
+      0&0&0
+    \end{pmatrix}.
+  \]
+  Dann ist $\operatorname{Spec}(A)=\{0,7\}$, $\dim(E(A,0))=1$ und
+  $\dim(E(A,7))=1$. Also ist
+  $E(A,0)\oplus E(A,7)\neq\mathbb{R}^3$ und $A$ somit nicht diagonalisierbar,
+  obwohl $\chi_A(X)=X^3-7X^2$.
+
+  \medskip\noindent\textit{Intuition: Ein Jordanblock zum Nullwert erzeugt zu kleine Eigenraumdimension; charakteristisches Polynom passt dennoch. Deshalb ist die Matrix nicht diagonalisierbar.}
+  \end{framed}
+
+  \item Es sei $\Theta:\mathbb{R}^n\to\mathbb{R}^n$ ein diagonalisierbarer Endomorphismus, der nur die Eigenwerte $1,-1$ und $2$ besitzt. Bestimmen Sie
+  \[
+    \Theta^4-5\Theta^2+5\,\mathrm{id}_{\mathbb{R}^n}.
+  \]
+  \begin{framed}
+  Sei $v\in\mathbb{R}^n$. Schreibe $v=v_{1}+v_{-1}+v_{2}$ mit
+  $v_\lambda$ Eigenvektoranteil zum Eigenwert $\lambda\in\{1,-1,2\}$. Dann
+  \[
+  \begin{aligned}
+    (\Theta^4-5\Theta^2+5\mathrm{id})(v)
+      &=\sum_{\lambda\in\{1,-1,2\}}\big(\lambda^4-5\lambda^2+5\big)v_\lambda\\
+      &=\big(1-5+5\big)v_1+\big(1-5+5\big)v_{-1}
+        +\big(16-20+5\big)v_2\\
+      &=v_1+v_{-1}+v_2=v.
+  \end{aligned}
+  \]
+  Also gilt $\Theta^4-5\Theta^2+5\,\mathrm{id}=\mathrm{id}$.
+
+  \medskip\noindent\textit{Intuition: Werte das Polynom auf jedem Eigenraum aus; Beiträge addieren sich und heben sich weg, daher bleibt der Vektor unverändert.}
+  \end{framed}
+\end{enumerate}
+
+% =========================
+% AUFGABE 2
+% =========================
+\aufgabe{2}{}
+Bestimmen Sie die Jordansche Normalform der Matrix
+\[
+A=
+\begin{pmatrix}
+-3 & -6 & 0 & -1 & 3\\
+ 1 &  3 & 2 & -3 & -5\\
+ 0 & -1 & -2 &  4 & 5\\
+ 0 & -3 & -6 &  6 & 6\\
+ 0 &  2 & 4 & -4 & -4
+\end{pmatrix}\in\mathbb{R}^{5\times 5},
+\]
+sowie eine Matrix $S$, so dass $S^{-1}AS$ diese Jordansche Normalform ist.
+\begin{framed}\end{framed}
+
+% =========================
+% AUFGABE 3
+% =========================
+\aufgabe{3}{}
+Sei $A\in\mathbb{C}^{5\times 5}$ mit $\mathrm{Rang}(A)=2$ und $\mathrm{Spur}(A)=0$.
+\begin{enumerate}
+  \item Wie viele Jordankästchen zum Eigenwert $0$ besitzt die Jordansche Normalform von $A$?
+  \begin{framed}
+  Es gilt $\dim E(A,0)=5-\mathrm{Rang}(A)=3$. Daher besitzt die Jordansche
+  Normalform von $A$ genau \emph{drei} Jordankästchen zum Eigenwert $0$.
+
+  \medskip\noindent\textit{Intuition: Rang liefert Dimension des Kerns; Anzahl Jordankästchen zum Nullwert entspricht der Dimension des Eigenraums.}
+  \end{framed}
+
+  \item Geben Sie alle Möglichkeiten für die Jordansche Normalform von $A$ an. Unterscheiden Sie dabei die beiden Fälle, dass entweder $0$ der einzige Eigenwert von $A$ ist oder es neben $0$ noch (mindestens) einen Eigenwert $\lambda\neq 0$ gibt.
+  \begin{framed}
+  \textbf{Fall 1:} $\operatorname{Spec}(A)=\{0\}$. Bis auf Vertauschung der
+  Jordanblöcke sind möglich:
+  \[
+    J_3(0)\oplus J_2(0)
+    \qquad\text{oder}\qquad
+    J_2(0)\oplus J_2(0)\oplus J_1(0).
+  \]
+  \textbf{Fall 2:} Es gibt $\lambda\in\operatorname{Spec}(A)\setminus\{0\}$.
+  Da $\mathrm{Spur}(A)=0$, ist dann auch $-\lambda\in\operatorname{Spec}(A)$.
+  In diesem Fall ist die Jordansche Normalform
+  \[
+    \operatorname{diag}(\lambda,\,-\lambda,\,0,\,0,\,0).
+  \]
+
+  \medskip\noindent\textit{Intuition: Spur null erzwingt paarweise entgegengesetzte Eigenwerte; Fälle trennen zwischen reinem Nullspektrum und gemischtem Spektrum.}
+  \end{framed}
+
+  \item Begründen Sie, wieso $A$ genau dann diagonalisierbar ist, wenn $\mathrm{Spur}(A^2)\neq 0$ gilt.
+  \begin{framed}
+  Ist $\mathrm{Spur}(A^2)\neq 0$, so existiert nach (b) ein Eigenwert
+  $\lambda\neq 0$ und $A$ ist dort diagonalisierbar. Umgekehrt:
+  Ist $A$ diagonalisierbar, so gibt es nach (b) einen Eigenwert $\lambda\neq 0$,
+  also
+  \[
+    \mathrm{Spur}(A^2)=\lambda^2+(-\lambda)^2=2\lambda^2\neq 0.
+  \]
+
+  \medskip\noindent\textit{Intuition: Diagonalisierbar mit nichtverschwindendem Eigenwert macht Spur von Quadrat positiv; umgekehrt liefert positive Spur einen nichtverschwindenden Eigenwert.}
+  \end{framed}
+\end{enumerate}
+
+% =========================
+% AUFGABE 4
+% =========================
+\aufgabe{4}{}
+\begin{enumerate}
+  \item Bestimmen Sie für den Untervektorraum $U\subset\mathbb{R}^5$ eine Orthonormalbasis bezüglich des Standardskalarproduktes,
+  \[
+    U=\left\langle
+    \begin{pmatrix}0\\0\\1\\0\\0\end{pmatrix},
+    \begin{pmatrix}1\\0\\1\\0\\0\end{pmatrix},
+    \begin{pmatrix}2\\1\\1\\0\\2\end{pmatrix},
+    \begin{pmatrix}2\\1\\0\\2\\3\end{pmatrix}
+    \right\rangle .
+  \]
+  \begin{framed}\end{framed}
+
+  \item Ergänzen Sie die gefundene Orthonormalbasis von $U$ zu einer Orthonormalbasis von $\mathbb{R}^5$.
+  \begin{framed}\end{framed}
+\end{enumerate}
+
+% =========================
+% AUFGABE 5
+% =========================
+\aufgabe{5}{}
+Wir betrachten im euklidischen Vektorraum $\mathbb{R}^5$ (mit dem Standardskalarprodukt) die Vektoren
+\[
+v_1:=\begin{pmatrix}0\\0\\1\\0\\0\end{pmatrix},\quad
+v_2:=\begin{pmatrix}1\\0\\1\\0\\0\end{pmatrix},\quad
+v_3:=\begin{pmatrix}2\\1\\1\\0\\2\end{pmatrix},\quad
+v_4:=\begin{pmatrix}2\\1\\0\\2\\3\end{pmatrix},\quad
+u:=\begin{pmatrix}0\\1\\0\\1\\0\end{pmatrix},\quad
+w:=\begin{pmatrix}0\\-2\\0\\0\\1\end{pmatrix}.
+\]
+Es sei $V_4:=\langle v_1,v_2,v_3,v_4\rangle$ und $V_3:=\langle v_1,v_2,v_3\rangle$.
+\begin{enumerate}
+  \item Bestimmen Sie den Abstand $d(u,V_4)$.
+  \begin{framed}\end{framed}
+
+  \item Bestimmen Sie den Abstand $d\bigl(u+\langle w\rangle,\,V_3\bigr)$ und die Lotfußpunkte des Lots zwischen $u+\langle w\rangle$ und $V_3$.
+  \begin{framed}\end{framed}
+\end{enumerate}
+
+% =========================
+% AUFGABE 6
+% =========================
+\aufgabe{6}{}
+Es seien $V$ und $W$ euklidische Vektorräume mit $\dim(V)>0$, und $\Phi:V\to W$ eine injektive lineare Abbildung. Zeigen Sie, dass die folgenden Aussagen äquivalent sind:
+\begin{enumerate}
+  \item Für alle $x,y\in V\setminus\{0\}$ gilt $\angle(x,y)=\angle(\Phi(x),\Phi(y))$.
+  \item Für alle $x,y\in V$ gilt $x\perp y\ \Rightarrow\ \Phi(x)\perp \Phi(y)$.
+  \item Für alle $x,y\in V$ gilt $\|x\|=\|y\|\ \Rightarrow\ \|\Phi(x)\|=\|\Phi(y)\|$.
+  \item Es gibt eine reelle Zahl $r>0$ so, dass für alle $x\in V$ gilt $\|\Phi(x)\|=r\,\|x\|$.
+  \item Es gibt eine reelle Zahl $r>0$ und eine lineare Isometrie $\Psi:V\to W$ so, dass $\Phi=r\,\Psi$.
+\end{enumerate}
+\emph{Hinweis:} Was ist das Skalarprodukt von $x+y$ mit $x-y$?
+\begin{framed}
+
+
+\underline{(i)$\Rightarrow$(ii)} Klar. \\
+\underline{(ii)$\Rightarrow$(iii)} Es gilt $\langle x+y,x-y\rangle=\|x\|^2-\|y\|^2$.
+Ist $\|x\|=\|y\|$, so folgt $\langle x+y,x-y\rangle=0$ und daher
+$0=\langle\Phi(x+y),\Phi(x-y)\rangle=\|\Phi(x)\|^2-\|\Phi(y)\|^2$. \\
+\underline{(iii)$\Rightarrow$(iv)} Sei $x\in V\setminus\{0\}$ und setze
+$r:=\dfrac{\|\Phi(x)\|}{\|x\|}$. Für $y\in V\setminus\{0\}$ existiert
+$\lambda>0$ mit $\|\lambda y\|=\|x\|$. Dann liefert (ii)
+\[
+  \|\Phi(x)\|=\|\Phi(\lambda y)\|=\lambda\|\Phi(y)\|,
+\]
+und somit $\|\Phi(y)\|=\lambda^{-1}\|\Phi(x)\|=\lambda^{-1}r\|x\|
+=r\|y\|$. \\
+\underline{(iv)$\Rightarrow$(v)} Für $r>0$ aus (iv) ist
+$\Psi(x):=\tfrac1r\,\Phi(x)$ eine Isometrie. \\
+\underline{(v)$\Rightarrow$(i)} Für $x,y\in V$ gilt
+\[
+\frac{\langle \Phi(x),\Phi(y)\rangle}{\|\Phi(x)\|\,\|\Phi(y)\|}
+=\frac{r^{-2}\langle \Psi(x),\Psi(y)\rangle}{r^{-2}\|\Psi(x)\|\,\|\Psi(y)\|}
+=\frac{\langle x,y\rangle}{\|x\|\,\|y\|},
+\]
+also bleibt der Winkel erhalten.
+
+\medskip\noindent\textit{Intuition: Erhalt von Winkeln, Orthogonalität und Normen sind gleichwertig, weil alles aus dem Skalarprodukt folgt; Skalierung zerfällt in Größe r und isometrischen Anteil.}
+\end{framed}
+
+% =========================
+% AUFGABE 7
+% =========================
+\aufgabe{7}{}
+Bestimmen Sie für alle $a,b\in\mathbb{R}$ alle linearen Isometrien $\Psi:\mathbb{R}^3\to\mathbb{R}^3$, die
+\[
+\Psi\!\begin{pmatrix}2\\0\\1\end{pmatrix}=\begin{pmatrix}2\\1\\0\end{pmatrix}
+\qquad\text{und}\qquad
+\Psi\!\begin{pmatrix}3\\3\\0\end{pmatrix}=\begin{pmatrix}1\\ a\\ b\end{pmatrix}
+\]
+erfüllen.
+\begin{framed}\end{framed}
+
+% =========================
+% AUFGABE 8
+% =========================
+\aufgabe{8}{}
+Sei $A\in \mathrm{SO}(4)$.
+\begin{enumerate}
+  \item Benutzen Sie die Ähnlichkeit von $A$ zu einer Matrix in Isometrie-Normalform, um zu zeigen, dass das charakteristische Polynom von $A$ von folgender Gestalt mit zwei reellen Parametern $c_1,c_2\in[-1,1]$ ist:
+  \[
+    \mathrm{CP}_A(X)=X^4-2(c_1+c_2)X^3+(4c_1c_2+2)X^2-2(c_1+c_2)X+1.
+  \]
+  \begin{framed}\end{framed}
+
+  \item Nun habe $A$ das charakteristische Polynom
+  \[
+    X^4-2X^3+3X^2-2X+1.
+  \]
+  Bestimmen Sie die Isometrie-Normalform von $A$.
+  \begin{framed}\end{framed}
+\end{enumerate}
+
+% =========================
+% AUFGABE 9
+% =========================
+\aufgabe{9}{}
+Der reelle Vektorraum $\mathbb{R}^3$ sei mit dem Skalarprodukt
+\[
+\langle x,y\rangle = x^\top\!\cdot
+\begin{pmatrix}
+1 & 0 & 1\\
+0 & 2 & 3\\
+1 & 3 & 6
+\end{pmatrix} y
+\]
+versehen. Finden Sie alle $\alpha\in\mathbb{R}$, für die die Abbildung $\Phi:\mathbb{R}^3\to\mathbb{R}^3$, $v\mapsto A\,v$ mit
+\[
+A=
+\begin{pmatrix}
+2 & -2 & -3\\
+\alpha & -1 & \alpha-4\\
+0 & 2 & 5
+\end{pmatrix}
+\]
+bezüglich des Skalarproduktes $\langle\cdot,\cdot\rangle$ selbstadjungiert ist. Stellen Sie für diese $\alpha$ eine Orthonormalbasis aus Eigenvektoren von $\Phi$ auf.
+\begin{framed}\end{framed}
+
+% =========================
+% AUFGABE 10
+% =========================
+\aufgabe{10}{}
+Im euklidischen Vektorraum $\mathbb{R}^3$ sei $f:\mathbb{R}^3\to\mathbb{R}^3$ eine Drehung, gegeben durch
+\[
+f\!\begin{pmatrix}2\\0\\1\end{pmatrix}=\begin{pmatrix}2\\1\\0\end{pmatrix},\qquad
+f\!\begin{pmatrix}-1\\2\\1\end{pmatrix}=\tfrac{1}{3}\begin{pmatrix}-2\\1\\7\end{pmatrix}.
+\]
+\begin{enumerate}
+  \item Bestimmen Sie die Drehachse von $f$.
+  \begin{framed}\end{framed}
+  \item Bestimmen Sie eine Orthonormalbasis der Drehebene von $f$.
+  \begin{framed}\end{framed}
+  \item Bestimmen Sie die euklidische Normalform $\tilde A$ von $f$.
+  \begin{framed}\end{framed}
+  \item Geben Sie eine Basis von $\mathbb{R}^3$ an, bezüglich der die Abbildungsmatrix von $f$ gleich der Normalform $\tilde A$ ist.
+  \begin{framed}\end{framed}
+\end{enumerate}
+
+% =========================
+% AUFGABE 11 (neu)
+% =========================
+\aufgabe{11}{}
+\begin{enumerate}
+  \item Es sei
+  \[
+    A:=
+    \begin{pmatrix}
+      0 & 0 & 1 & 3\\
+      0 & 0 & 3 & 1\\
+     -1 & -3 & 0 & 0\\
+     -3 & -1 & 0 & 0
+    \end{pmatrix}.
+  \]
+  Geben Sie zwei orthogonale 2\,-dimensionale Unterräume $U_1,U_2\subset \mathbb{R}^4$ an, so dass $AU_1\subseteq U_1$ und $AU_2\subseteq U_2$.
+  \begin{framed}
+  Wir beobachten
+  \[
+    A\!\begin{pmatrix}1\\1\\0\\0\end{pmatrix}=-4\!\begin{pmatrix}0\\0\\1\\1\end{pmatrix},
+    \qquad
+    A\!\begin{pmatrix}0\\0\\1\\1\end{pmatrix}=4\!\begin{pmatrix}1\\1\\0\\0\end{pmatrix},
+  \]
+  sowie
+  \[
+    A\!\begin{pmatrix}1\\-1\\0\\0\end{pmatrix}=2\!\begin{pmatrix}0\\0\\1\\-1\end{pmatrix},
+    \qquad
+    A\!\begin{pmatrix}0\\0\\1\\-1\end{pmatrix}=-2\!\begin{pmatrix}1\\-1\\0\\0\end{pmatrix}.
+  \]
+  Damit sind
+  \[
+    U_1=\left\langle \begin{pmatrix}1\\1\\0\\0\end{pmatrix},
+                       \begin{pmatrix}0\\0\\1\\1\end{pmatrix}\right\rangle,
+    \qquad
+    U_2=\left\langle \begin{pmatrix}1\\-1\\0\\0\end{pmatrix},
+                       \begin{pmatrix}0\\0\\1\\-1\end{pmatrix}\right\rangle
+  \]
+  zwei orthogonale $2$-dimensionale, $A$-invariante Unterräume von $\mathbb{R}^4$.
+
+  \medskip\noindent\textit{Intuition: Kluge Wahl symmetrischer und antisymmetrischer Richtungen koppelt paarweise, sodass der Operator jede Ebene in sich abbildet.}
+  \end{framed}
+
+  \item Es sei nun $A\in\mathbb{R}^{n\times n}$ symmetrisch und $v\in\mathbb{R}^n$ ein Eigenvektor. Zeigen Sie, dass
+  \[
+    \left\langle \left\{ \binom{v}{0},\,\binom{0}{v} \right\} \right\rangle
+  \]
+  unter
+  \[
+    \begin{pmatrix}0&A\\ -A&0\end{pmatrix}\in\mathbb{R}^{2n\times 2n}
+  \]
+  invariant ist.
+  \begin{framed}
+  Sei $Av=\lambda v$. Dann gilt
+  \[
+    \begin{pmatrix}0&A\\-A&0\end{pmatrix}\!\binom{v}{0}
+      =\binom{0}{-Av}=-\lambda\binom{0}{v},\qquad
+    \begin{pmatrix}0&A\\-A&0\end{pmatrix}\!\binom{0}{v}
+      =\binom{Av}{0}=\lambda\binom{v}{0}.
+  \]
+  Also ist der durch $\binom{v}{0}$ und $\binom{0}{v}$ erzeugte Unterraum invariant.
+
+  \medskip\noindent\textit{Intuition: Eigenrichtung von A erzeugt ein zweidimensionales Schwingungspaar; der Blockwechsel dreht innerhalb dieses Paares, daher bleibt der Spannraum invariant.}
+  \end{framed}
+\end{enumerate}
+
+\vspace{0.5em}
+
+\end{document}
