@@ -828,42 +828,28 @@ Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal. Eine ONB ist daher
   \frac{1}{\sqrt{38}}\begin{pmatrix}6\\-1\\-1\end{pmatrix}\right\}.
   \]
   \item
-  Da die Achse $a:=(1,1,1)^{\top}$ fest bleibt, arbeitet man in der Drehebene
-$U=a^{\perp}$. Schreibe die Orthogonalprojektion auf $U$ als
-\[
-\pi_U(x)=x-\frac{\langle x,a\rangle}{\|a\|^2}\,a
-\quad\text{mit}\quad \|a\|^2=3.
-\]
-Dann ist
-\[
-u_1=\frac{\pi_U(2,0,1)^{\top}}{\|\pi_U(2,0,1)^{\top}\|}
-=\frac{(2,0,1)^{\top}-\frac{3}{3}(1,1,1)^{\top}}{\sqrt2}
-=\frac{1}{\sqrt2}(1,-1,0)^{\top}.
-\]
-Wegen $f(a)=a$ gilt ebenso
-\[
-f(u_1)=\frac{\pi_U\bigl(f(2,0,1)^{\top}\bigr)}{\|\pi_U(2,0,1)^{\top}\|}
-=\frac{(2,1,0)^{\top}-\frac{3}{3}(1,1,1)^{\top}}{\sqrt2}
-=\frac{1}{\sqrt2}(1,0,-1)^{\top}.
-\]
-Damit
-\[
-\cos\alpha=\langle u_1,f(u_1)\rangle=\frac12
-\ \Rightarrow\ \alpha=\frac{\pi}{3}.
-\]
+  Die Isometrienormalform einer Dreidimensionalen Drehung besteht aus einem Drehkästchen (mit dem Winkel der Drehung) und einer $1$. \\
+  Den Winkel der Drehung bestimmen wir, indem wir den Winkel zwischen einem Vektor $v$ auf der Drehebene und seiner Drehung $f(v)$ bestimmen.\\
+  $\begin{pmatrix}1\\-1\\0\end{pmatrix} = \begin{pmatrix}2\\0\\1\end{pmatrix} - \begin{pmatrix}1\\1\\1\end{pmatrix}$ 
+  ist orthogonal zur Drehachse $\begin{pmatrix}1\\ 1\\ 1\end{pmatrix}$ und somit auf der Drehebene. \\
+  $f\begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix}=f\begin{pmatrix}2 \\ 0 \\ 1\end{pmatrix}-f\begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix}=\begin{pmatrix}2 \\ 1 \\ 0\end{pmatrix}-\begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix}=\begin{pmatrix}1 \\ 0 \\ -1\end{pmatrix}$
 
-  \medskip\noindent\textit{Intuition: Gram–Schmidt innerhalb von $U$ und Winkel über Bild von $u_1$.}
+  Wir suchen also ein $\alpha \in [0,\pi)$ mit:\\
+  $\cos(\alpha)=\frac{\langle(1,-1,0),(1,0,-1)\rangle}{\|(1,-1,0)\|\cdot \|(1,0,-1)\| } = \frac 12\implies \alpha = \frac{\pi}{3}$
 
-  In Achsen-/Ebenenbasis hat $f$ die Form $1\oplus R_{\pi/3}$:
+  Somit folgt:
   \[
-  \tilde A=
+  \tilde A=\begin{pmatrix}
+  1&0&0\\
+  0&\cos(\frac{\pi}{3})&-\sin(\frac{\pi}{3})\\
+  0&\cos(\frac{\pi}{3})&\sin(\frac{\pi}{3})
+  \end{pmatrix}=
   \begin{pmatrix}
   1&0&0\\
   0&\tfrac12&-\tfrac{\sqrt3}{2}\\
   0&\tfrac{\sqrt3}{2}&\tfrac12
   \end{pmatrix}.
   \]
-
   \medskip\noindent\textit{Intuition: Identität auf der Achse, Rotation in der Ebene.}
 
   \item
