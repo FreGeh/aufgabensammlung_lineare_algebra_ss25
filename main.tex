@@ -808,14 +808,26 @@ Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal. Eine ONB ist daher
   \medskip\noindent\textit{Intuition: Differenzen $f(v)-v$ liegen in der Drehebene; deren Orthogonalkomplement ist die Achse.}
 
   \item
-  Wähle $u_1=\dfrac{1}{\sqrt2}\begin{pmatrix}1\\-1\\0\end{pmatrix}$.
-  Orthogonalisiere
+  Wir orthogonalisieren die Basis der Ebene, die wir in (a) bestimmt haben.\\
+  Wähle $u_1=\dfrac{1}{\sqrt2}\begin{pmatrix}1\\-1\\0\end{pmatrix}$.\\
+  Orthogonalisiere \\
   \[
-  \tilde u_2=\begin{pmatrix}0\\1\\-1\end{pmatrix}
-  -\frac{\langle(0,1,-1),(1,-1,0)\rangle}{\|u_1\|^2}\,u_1
-  =\begin{pmatrix}\tfrac12\\\tfrac12\\-1\end{pmatrix},
+  \tilde u_2=\begin{pmatrix}1\\-5\\4\end{pmatrix}
+  -\frac{\langle(1,-5,4),(1,-1,0)\rangle}{\|u_1\|^2}\,u_1
+  =\frac{1}{6}\begin{pmatrix}6\\-1\\-1\end{pmatrix},
   \]
-  normiert zu $\dfrac{1}{\sqrt6}\begin{pmatrix}1\\1\\-2\end{pmatrix}$.
+  Normiere \\
+  \[
+  n_1=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\\0\end{pmatrix} ; 
+  n_2=\frac{1}{\sqrt{38}}\begin{pmatrix}6\\-1\\-1\end{pmatrix} 
+  \]
+  Daraus folgt die Orthonormalbasis
+  \[
+  \left\{\,
+  \frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\\0\end{pmatrix},
+  \frac{1}{\sqrt{38}}\begin{pmatrix}6\\-1\\-1\end{pmatrix}\right\}.
+  \]
+  \item
   Da die Achse $a:=(1,1,1)^{\top}$ fest bleibt, arbeitet man in der Drehebene
 $U=a^{\perp}$. Schreibe die Orthogonalprojektion auf $U$ als
 \[
@@ -842,7 +854,6 @@ Damit
 
   \medskip\noindent\textit{Intuition: Gram–Schmidt innerhalb von $U$ und Winkel über Bild von $u_1$.}
 
-  \item
   In Achsen-/Ebenenbasis hat $f$ die Form $1\oplus R_{\pi/3}$:
   \[
   \tilde A=
