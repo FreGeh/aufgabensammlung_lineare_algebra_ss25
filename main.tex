@@ -814,35 +814,35 @@ Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal. Eine ONB ist daher
   \[
   \tilde u_2=\begin{pmatrix}1\\-5\\4\end{pmatrix}
   -\frac{\langle(1,-5,4),(0,-1,1)\rangle}{\|u_1\|^2}\,u_1
-  =\frac{1}{6}\begin{pmatrix}6\\-1\\-1\end{pmatrix},
+  =\begin{pmatrix}1\\-\tfrac12\\-\tfrac12\end{pmatrix},
   \]
   Normiere \\
   \[
-  n_1=\frac{1}{\sqrt{2}}\begin{pmatrix}0\\-1\\1\end{pmatrix} ; 
-  n_2=\frac{1}{\sqrt{38}}\begin{pmatrix}6\\-1\\-1\end{pmatrix} 
+  n_1=\frac{1}{\sqrt{2}}\begin{pmatrix}0\\-1\\1\end{pmatrix} ,\quad 
+  n_2=\frac{1}{\sqrt{6}}\begin{pmatrix}2\\-1\\-1\end{pmatrix}.
   \]
   Daraus folgt die Orthonormalbasis
   \[
   \left\{\,
   \frac{1}{\sqrt{2}}\begin{pmatrix}0\\-1\\1\end{pmatrix},
-  \frac{1}{\sqrt{38}}\begin{pmatrix}6\\-1\\-1\end{pmatrix}\right\}.
+  \frac{1}{\sqrt{6}}\begin{pmatrix}2\\-1\\-1\end{pmatrix}\right\}.
   \]
   \item
-  Die Isometrienormalform einer Dreidimensionalen Drehung besteht aus einem Drehkästchen (mit dem Winkel der Drehung) und einer $1$. \\
+  Die Isometrienormalform einer dreidimensionalen Drehung besteht aus einem Drehkästchen (mit dem Winkel der Drehung) und einer $1$. \\
   Den Winkel der Drehung bestimmen wir, indem wir den Winkel zwischen einem Vektor $v$ auf der Drehebene und seiner Drehung $f(v)$ bestimmen.\\
   $\begin{pmatrix}1\\-1\\0\end{pmatrix} = \begin{pmatrix}2\\0\\1\end{pmatrix} - \begin{pmatrix}1\\1\\1\end{pmatrix}$ 
   ist orthogonal zur Drehachse $\begin{pmatrix}1\\ 1\\ 1\end{pmatrix}$ und somit auf der Drehebene. \\
-  $f\begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix}=f\begin{pmatrix}2 \\ 0 \\ 1\end{pmatrix}-f\begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix}=\begin{pmatrix}2 \\ 1 \\ 0\end{pmatrix}-\begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix}=\begin{pmatrix}1 \\ 0 \\ -1\end{pmatrix}$
+  $f\begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix}=f\begin{pmatrix}2 \\ 0 \\ 1\end{pmatrix}-f\begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix}=\begin{pmatrix}2 \\ 1 \\ 0\end{pmatrix}-\begin{pmatrix}1 \\ 1 \\ 1\end{pmatrix}=\begin{pmatrix}1 \\ 0 \\ -1\end{pmatrix}$.
 
   Wir suchen also ein $\alpha \in [0,\pi)$ mit:\\
-  $\cos(\alpha)=\frac{\langle(1,-1,0),(1,0,-1)\rangle}{\|(1,-1,0)\|\cdot \|(1,0,-1)\| } = \frac 12\implies \alpha = \frac{\pi}{3}$
+  $\cos(\alpha)=\frac{\langle(1,-1,0),(1,0,-1)\rangle}{\|(1,-1,0)\|\cdot \|(1,0,-1)\| } = \frac 12\implies \alpha = \frac{\pi}{3}$.
 
   Somit folgt:
   \[
   \tilde A=\begin{pmatrix}
   1&0&0\\
-  0&\cos(\frac{\pi}{3})&-\sin(\frac{\pi}{3})\\
-  0&\cos(\frac{\pi}{3})&\sin(\frac{\pi}{3})
+  0&\cos(\tfrac{\pi}{3})&-\sin(\tfrac{\pi}{3})\\
+  0&\sin(\tfrac{\pi}{3})&\cos(\tfrac{\pi}{3})
   \end{pmatrix}=
   \begin{pmatrix}
   1&0&0\\
@@ -863,6 +863,7 @@ Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal. Eine ONB ist daher
 
   \medskip\noindent\textit{Intuition: Normierte Achse plus ONB der Drehebene.}
 \end{enumerate}
+
 
 \loesung[ÜB13-A2]
 \begin{enumerate}
